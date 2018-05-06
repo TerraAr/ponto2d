@@ -2,6 +2,7 @@
 #include<iostream>
 
 #define PI 3.14159265358979323846
+#define complexo ponto2d
 
 class ponto2d{
 private:
