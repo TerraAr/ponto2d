@@ -4,6 +4,8 @@
 
 class ponto2d{
 private:
+#define ERRO 0.00001
+
 double pol[2],rect[2];
 
 void pol(){
@@ -21,7 +23,15 @@ friend ponto2d operator+(const ponto2d&,const ponto2d&);
 friend ponto2d operator-(const ponto2d&,const ponto2d&);
 friend ponto2d operator*(const ponto2d&,const ponto2d&);
 friend ponto2d operator/(const ponto2d&,const ponto2d&);
+
+friend ponto2d operator+=(const ponto2d&,const ponto2d&);
+friend ponto2d operator-=(const ponto2d&,const ponto2d&);
+friend ponto2d operator*=(const ponto2d&,const ponto2d&);
+friend ponto2d operator/=(const ponto2d&,const ponto2d&);
+
 friend bool operator==(const ponto2d&,const ponto2d&);
+friend bool operator!=(const ponto2d&,const ponto2d&);
+
 
 ponto2d(){
 pol[0]=0;
@@ -75,7 +85,39 @@ aux.rect();
 return aux;
 }
 
+
+ponto2d operator+=(ponto2d& a,const ponto2d& b){
+a.rect[0]+=b.rect[0];
+a.rect[1]+=b.rect[1];
+a.pol();
+return a;
+}
+ponto2d operator-=(ponto2d& a,const ponto2d& b){
+a.rect[0]-=b.rect[0];
+a.rect[1]-=b.rect[1];
+a.pol();
+return a;
+}
+ponto2d operator*=(ponto2d& a,const ponto2d& b){
+a.pol[0]*=b.pol[0];
+a.pol[1]+=b.pol[1];
+a.rect();
+return a;
+}
+ponto2d operator/=(ponto2d& a,const ponto2d& b){
+a.pol[0]/=b.pol[0];
+a.pol[1]-=b.pol[1];
+a.rect();
+return a;
+}
+
+
 bool operator==(const ponto2d& a,const ponto2d& b){
-if(a.rect[0]==b.rect[0] && a.rect[1]==b.rect[1]) return 1;
+if(abs(a.rect[0]-b.rect[0])/a.rect[0]<ERRO && abs(a.rect[1]-b.rect[1])/a.rect[1]<ERRO) return 1;
 return 0;
+}
+
+bool operator!=(const ponto2d& a,const ponto2d& b){
+if(a==b) return 0;
+return 1;
 }
