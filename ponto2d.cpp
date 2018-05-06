@@ -8,7 +8,7 @@ double pol[2],rect[2];
 
 void pol(){
 pol[0]=sqrt(rect[0]*rect[0]+rect[1]*rect[1]);
-pol[1]=atan(rect[1]/rect[0]);
+pol[1]=asin(rect[1]/pol[0]);
 }
 
 void rect(){
@@ -21,6 +21,7 @@ friend ponto2d operator+(const ponto2d&,const ponto2d&);
 friend ponto2d operator-(const ponto2d&,const ponto2d&);
 friend ponto2d operator*(const ponto2d&,const ponto2d&);
 friend ponto2d operator/(const ponto2d&,const ponto2d&);
+friend bool operator==(const ponto2d&,const ponto2d&);
 
 ponto2d(){
 pol[0]=0;
@@ -72,4 +73,9 @@ aux.pol[0]=a.pol[0]/b.pol[0];
 aux.pol[1]=a.pol[1]-b.pol[1];
 aux.rect();
 return aux;
+}
+
+bool operator==(const ponto2d& a,const ponto2d& b){
+if(a.rect[0]==b.rect[0] && a.rect[1]==b.rect[1]) return 1;
+return 0;
 }
