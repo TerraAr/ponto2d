@@ -1,4 +1,5 @@
 #include<cmath>
+#include<iostream>
 
 #define PI 3.14159265358979323846
 
@@ -50,6 +51,14 @@ void rect(double x,double y){
 rect[0]=x;
 rect[1]=y;
 pol();
+}
+
+void imprimerect(){
+std::cout<<rect[0]<<"+"<<rect[1]<<"i"<<std::endl;
+}
+
+void imprimepol(){
+std::cout<<pol[0]<<" /_"<<pol[1]<<" rad"<<std::endl;
 }
 };
 
