@@ -26,14 +26,16 @@ friend ponto2d operator-(const ponto2d&,const ponto2d&);
 friend ponto2d operator*(const ponto2d&,const ponto2d&);
 friend ponto2d operator/(const ponto2d&,const ponto2d&);
 
-friend ponto2d operator+=(const ponto2d&,const ponto2d&);
-friend ponto2d operator-=(const ponto2d&,const ponto2d&);
-friend ponto2d operator*=(const ponto2d&,const ponto2d&);
-friend ponto2d operator/=(const ponto2d&,const ponto2d&);
+friend ponto2d operator=(ponto2d&,const ponto2d&);
+friend ponto2d operator+=(ponto2d&,const ponto2d&);
+friend ponto2d operator-=(ponto2d&,const ponto2d&);
+friend ponto2d operator*=(ponto2d&,const ponto2d&);
+friend ponto2d operator/=(ponto2d&,const ponto2d&);
 
 friend bool operator==(const ponto2d&,const ponto2d&);
 friend bool operator!=(const ponto2d&,const ponto2d&);
 
+friend ponto2d pow(const ponto2d&,const double);
 
 ponto2d(){
 pol[0]=0;
@@ -96,6 +98,14 @@ return aux;
 }
 
 
+ponto2d operator=(ponto2d& a,const ponto2d b){
+a.rect[0]=b.rect[0];
+a.rect[1]=b.rect[1];
+a.pol[0]=b.pol[0];
+a.pol[1]=b.pol[1];
+return a;
+}
+
 ponto2d operator+=(ponto2d& a,const ponto2d& b){
 a.rect[0]+=b.rect[0];
 a.rect[1]+=b.rect[1];
@@ -130,4 +140,13 @@ return 0;
 bool operator!=(const ponto2d& a,const ponto2d& b){
 if(a==b) return 0;
 return 1;
+}
+
+
+ponto2d pow(const ponto2d& a,const double x){
+ponto2d aux;
+aux.pol[0]=pow(a.pol[0],x);
+aux.pol[1]=x*a.pol[1];
+aux.rect();
+return aux;
 }
