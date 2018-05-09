@@ -25,6 +25,7 @@ friend ponto2d operator+(const ponto2d&,const ponto2d&);
 friend ponto2d operator-(const ponto2d&,const ponto2d&);
 friend ponto2d operator*(const ponto2d&,const ponto2d&);
 friend ponto2d operator/(const ponto2d&,const ponto2d&);
+friend ponto2d operator-(const ponto2d&);
 
 friend ponto2d operator=(ponto2d&,const ponto2d&);
 friend ponto2d operator+=(ponto2d&,const ponto2d&);
@@ -93,6 +94,14 @@ ponto2d operator/(const ponto2d& a,const ponto2d& b){
 ponto2d aux;
 aux.pol[0]=a.pol[0]/b.pol[0];
 aux.pol[1]=a.pol[1]-b.pol[1];
+aux.rect();
+return aux;
+}
+
+ponto2d operator-(ponto2d& a){
+ponto2d aux;
+aux.pol[0]=a.pol[0];
+aux.pol[1]=a.pol[1]+PI;
 aux.rect();
 return aux;
 }
