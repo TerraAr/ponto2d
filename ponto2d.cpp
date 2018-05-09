@@ -107,7 +107,7 @@ return aux;
 }
 
 
-ponto2d operator=(ponto2d& a,const ponto2d b){
+ponto2d operator=(ponto2d& a,const ponto2d& b){
 a.rect[0]=b.rect[0];
 a.rect[1]=b.rect[1];
 a.pol[0]=b.pol[0];
@@ -121,18 +121,21 @@ a.rect[1]+=b.rect[1];
 a.pol();
 return a;
 }
+
 ponto2d operator-=(ponto2d& a,const ponto2d& b){
 a.rect[0]-=b.rect[0];
 a.rect[1]-=b.rect[1];
 a.pol();
 return a;
 }
+
 ponto2d operator*=(ponto2d& a,const ponto2d& b){
 a.pol[0]*=b.pol[0];
 a.pol[1]+=b.pol[1];
 a.rect();
 return a;
 }
+
 ponto2d operator/=(ponto2d& a,const ponto2d& b){
 a.pol[0]/=b.pol[0];
 a.pol[1]-=b.pol[1];
