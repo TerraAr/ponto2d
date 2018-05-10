@@ -13,6 +13,7 @@ double pol[2],rect[2];
 void pol(){
 pol[0]=sqrt(rect[0]*rect[0]+rect[1]*rect[1]);
 pol[1]=asin(rect[1]/pol[0]);
+if(rect[1]<0) pol[1]=PI-pol[1];
 }
 
 void rect(){
