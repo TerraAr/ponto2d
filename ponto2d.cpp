@@ -38,6 +38,7 @@ friend bool operator==(const ponto2d&,const ponto2d&);
 friend bool operator!=(const ponto2d&,const ponto2d&);
 
 friend ponto2d pow(const ponto2d&,const double);
+friend ponto2d sqrt(const ponto2d&);
 
 ponto2d(){
 pol[0]=0;
@@ -161,5 +162,12 @@ ponto2d aux;
 aux.pol[0]=pow(a.pol[0],x);
 aux.pol[1]=x*a.pol[1];
 aux.rect();
+return aux;
+}
+
+ponto2d sqrt(const ponto2d& a){
+ponto2d aux;
+aux.pol[0]=sqrt(a.pol[0]);
+aux;pol[1]=a.pol[1]/2;
 return aux;
 }
