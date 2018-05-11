@@ -1,7 +1,7 @@
 #include<cmath>
 #include<iostream>
 
-#define PI 3.14159265358979323846
+#define PI M_PI
 #define complexo ponto2d
 
 class ponto2d{
