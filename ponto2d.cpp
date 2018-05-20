@@ -41,6 +41,8 @@ friend ponto2d pow(const ponto2d&,const double);
 friend ponto2d sqrt(const ponto2d&);
 friend ponto2d cbrt(const ponto2d&);
 
+friend double abs(const ponto2d& a);
+
 ponto2d(){
 pol[0]=0;
 pol[1]=0;
@@ -181,3 +183,6 @@ aux.pol[1]=a.pol[1]/3;
 aux.rect();
 return aux;
 }
+
+
+double abs(const ponto2d& a) {return a.pol[0];}
