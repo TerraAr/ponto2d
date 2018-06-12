@@ -1,5 +1,5 @@
 #include<cmath>
-#include<iostream>
+#include<stdio.h>
 
 #define PI M_PI
 #define complexo ponto2d
@@ -62,13 +62,8 @@ rect[1]=y;
 pol();
 }
 
-void imprimerect(){
-std::cout<<rect[0]<<"+"<<rect[1]<<"i"<<std::endl;
-}
-
-void imprimepol(){
-std::cout<<pol[0]<<" /_"<<pol[1]<<" rad"<<std::endl;
-}
+void imprimerect() {printf("%lf+%lfi\n",rect[0],rect[1]);}
+void imprimepol() {printf("%lf /_%lf rad\n",pol[0],pol[1]);}
 };
 
 ponto2d operator+(const ponto2d& a,const ponto2d& b){
