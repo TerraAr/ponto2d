@@ -1,5 +1,5 @@
-#include<cmath>
 #include<stdio.h>
+#include<math.h>
 
 #define PI M_PI
 #define complexo ponto2d
@@ -22,17 +22,23 @@ rect[1]=pol[0]*sin(pol[1]);
 }
 
 public:
-friend ponto2d operator+(const ponto2d&,const ponto2d&);
-friend ponto2d operator-(const ponto2d&,const ponto2d&);
-friend ponto2d operator*(const ponto2d&,const ponto2d&);
-friend ponto2d operator/(const ponto2d&,const ponto2d&);
-friend ponto2d operator-(const ponto2d&);
+ponto2d operator-();
 
-friend ponto2d operator=(ponto2d&,const ponto2d&);
-friend ponto2d operator+=(ponto2d&,const ponto2d&);
-friend ponto2d operator-=(ponto2d&,const ponto2d&);
-friend ponto2d operator*=(ponto2d&,const ponto2d&);
-friend ponto2d operator/=(ponto2d&,const ponto2d&);
+ponto2d operator+(const ponto2d);
+ponto2d operator-(const ponto2d);
+ponto2d operator*(const ponto2d);
+ponto2d operator/(const ponto2d);
+
+ponto2d operator+(const double);
+ponto2d operator-(const double);
+ponto2d operator*(const double);
+ponto2d operator/(const double);
+
+ponto2d operator=(const ponto2d);
+ponto2d operator+=(const ponto2d);
+ponto2d operator-=(const ponto2d);
+ponto2d operator*=(const ponto2d);
+ponto2d operator/=(const ponto2d);
 
 friend bool operator==(const ponto2d&,const ponto2d&);
 friend bool operator!=(const ponto2d&,const ponto2d&);
@@ -43,12 +49,7 @@ friend ponto2d cbrt(const ponto2d&);
 
 friend double abs(const ponto2d& a);
 
-ponto2d(){
-pol[0]=0;
-pol[1]=0;
-rect[0]=0;
-rect[1]=0;
-}
+ponto2d() : pol[0](0),pol[1](0),rect[0](0),rect[1](0) {}
 
 void pol(double a,double b){
 pol[0]=a;
@@ -66,81 +67,115 @@ void imprimerect() {printf("%lf+%lfi\n",rect[0],rect[1]);}
 void imprimepol() {printf("%lf /_%lf rad\n",pol[0],pol[1]);}
 };
 
-ponto2d operator+(const ponto2d& a,const ponto2d& b){
+ponto2d ponto2d::operator-(){
 ponto2d aux;
-aux.rect[0]=a.rect[0]+b.rect[0];
-aux.rect[1]=a.rect[1]+b.rect[1];
+aux.pol[0]=pol[0];
+aux.pol[1]=pol[1]+PI;
+aux.rect();
+return aux;
+}
+
+
+ponto2d ponto2d::operator+(const ponto2d b){
+ponto2d aux;
+aux.rect[0]=rect[0]+b.rect[0];
+aux.rect[1]=rect[1]+b.rect[1];
 aux.pol();
 return aux;
 }
 
-ponto2d operator-(const ponto2d& a,const ponto2d& b){
+ponto2d ponto2d::operator-(const ponto2d b){
 ponto2d aux;
-aux.rect[0]=a.rect[0]-b.rect[0];
-aux.rect[1]=a.rect[1]-b.rect[1];
+aux.rect[0]=rect[0]-b.rect[0];
+aux.rect[1]=rect[1]-b.rect[1];
 aux.pol();
 return aux;
 }
 
-ponto2d operator*(const ponto2d& a,const ponto2d& b){
+ponto2d ponto2d::operator*(const ponto2d b){
 ponto2d aux;
-aux.pol[0]=a.pol[0]*b.pol[0];
-aux.pol[1]=a.pol[1]+b.pol[1];
+aux.pol[0]=pol[0]*b.pol[0];
+aux.pol[1]=pol[1]+b.pol[1];
 aux.rect();
 return aux;
 }
 
-ponto2d operator/(const ponto2d& a,const ponto2d& b){
+ponto2d ponto2d::operator/(const ponto2d b){
 ponto2d aux;
-aux.pol[0]=a.pol[0]/b.pol[0];
-aux.pol[1]=a.pol[1]-b.pol[1];
-aux.rect();
-return aux;
-}
-
-ponto2d operator-(ponto2d& a){
-ponto2d aux;
-aux.pol[0]=a.pol[0];
-aux.pol[1]=a.pol[1]+PI;
+aux.pol[0]=pol[0]/b.pol[0];
+aux.pol[1]=pol[1]-b.pol[1];
 aux.rect();
 return aux;
 }
 
 
-ponto2d operator=(ponto2d& a,const ponto2d& b){
-a.rect[0]=b.rect[0];
-a.rect[1]=b.rect[1];
-a.pol[0]=b.pol[0];
-a.pol[1]=b.pol[1];
-return a;
+ponto2d ponto2d::operator+(const double b){
+ponto2d aux;
+aux.rect[0]=rect[0]+b;
+aux.rect[1]=rect[1];
+aux.pol();
+return aux;
 }
 
-ponto2d operator+=(ponto2d& a,const ponto2d& b){
-a.rect[0]+=b.rect[0];
-a.rect[1]+=b.rect[1];
-a.pol();
-return a;
+ponto2d ponto2d::operator-(const double b){
+ponto2d aux;
+aux.rect[0]=rect[0]-b;
+aux.rect[1]=rect[1];
+aux.pol();
+return aux;
 }
 
-ponto2d operator-=(ponto2d& a,const ponto2d& b){
-a.rect[0]-=b.rect[0];
-a.rect[1]-=b.rect[1];
-a.pol();
-return a;
+ponto2d ponto2d::operator*(const double b){
+ponto2d aux;
+aux.pol[0]=pol[0]*b;
+aux.pol[1]=pol[1];
+aux.rect();
+return aux;
 }
 
-ponto2d operator*=(ponto2d& a,const ponto2d& b){
-a.pol[0]*=b.pol[0];
-a.pol[1]+=b.pol[1];
-a.rect();
-return a;
+ponto2d ponto2d::operator/(const double b){
+ponto2d aux;
+aux.pol[0]=pol[0]/b;
+aux.pol[1]=pol[1];
+aux.rect();
+return aux;
 }
 
-ponto2d operator/=(ponto2d& a,const ponto2d& b){
-a.pol[0]/=b.pol[0];
-a.pol[1]-=b.pol[1];
-a.rect();
-return a;
+
+ponto2d ponto2d::operator=(const ponto2d b){
+rect[0]=b.rect[0];
+rect[1]=b.rect[1];
+pol[0]=b.pol[0];
+pol[1]=b.pol[1];
+return *this;
+}
+
+ponto2d ponto2d::operator+=(const ponto2d b){
+rect[0]+=b.rect[0];
+rect[1]+=b.rect[1];
+pol();
+return *this;
+}
+
+ponto2d ponto2d::operator-=(const ponto2d b){
+rect[0]-=b.rect[0];
+rect[1]-=b.rect[1];
+pol();
+return *this;
+}
+
+ponto2d ponto2d::operator*=(const ponto2d b){
+pol[0]*=b.pol[0];
+pol[1]+=b.pol[1];
+rect();
+return *this;
+}
+
+ponto2d ponto2d::operator/=(const ponto2d b){
+pol[0]/=b.pol[0];
+pol[1]-=b.pol[1];
+rect();
+return *this;
 }
 
 
