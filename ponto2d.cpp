@@ -215,42 +215,45 @@ atualizado=1;
 pol();
 }
 
-pol[0]/=b.pol[0];
+*pol/=b.*pol;
 pol[1]-=b.pol[1];
 return *this;
 }
 
 
 inline bool operator==(const ponto2d a,const ponto2d b){
-if(abs(a.rect[0]-b.rect[0])/a.rect[0]<ERRO && abs(a.rect[1]-b.rect[1])/a.rect[1]<ERRO) return 1;
+if(abs(a.pol[0]-b.pol[0])/a.pol[0]<ERRO && abs(a.pol[1]-b.pol[1])/a.pol[1]<ERRO && atualizado) return 1;
+if(abs(a.rect[0]-b.rect[0])/a.rect[0]<ERRO && abs(a.rect[1]-b.rect[1])/a.rect[1]<ERRO && !atualizado) return 1;
 return 0;
 }
 
 inline bool operator!=(const ponto2d a,const ponto2d b){
-if(a==b) return 0;
-return 1;
+return !(a==b);
 }
 
 
 ponto2d pow(const ponto2d a,const double x){
+if(!a.atualizado) a.pol();
 ponto2d aux;
-aux.pol[0]=pow(a.pol[0],x);
+aux.*pol=pow(a.*pol,x);
 aux.pol[1]=x*a.pol[1];
 aux.atualizado=1;
 return aux;
 }
 
 ponto2d sqrt(const ponto2d a){
+if(!a.atualizado) a.pol();
 ponto2d aux;
-aux.pol[0]=sqrt(a.pol[0]);
+aux.*pol=sqrt(a.*pol);
 aux.pol[1]=a.pol[1]/2;
 aux.atualizado=1;
 return aux;
 }
 
 ponto2d cbrt(const ponto2d a){
+if(!a.atualizado) a.pol();
 ponto2d aux;
-aux.pol[0]=cbrt(a.pol[0]);
+aux.*pol=cbrt(a.*pol);
 aux.pol[1]=a.pol[1]/3;
 aux.atualizado=1;
 return aux;
@@ -259,5 +262,5 @@ return aux;
 
 inline double abs(const ponto2d a){
 if(!a.atualizado) a.pol();
-return a.pol[0];
+return a.*pol;
 }
